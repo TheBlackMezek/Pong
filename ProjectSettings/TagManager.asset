@@ -3,7 +3,11 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Paddle
+  - ScoreWall
+  - ScoreWall1
+  - ScoreWall2
   layers:
   - Default
   - TransparentFX
