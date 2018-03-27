@@ -63,6 +63,7 @@ public class ScoreManager : MonoBehaviour {
             break;
         }
 
+        Time.timeScale = 1;
         SceneManager.LoadScene(menuSceneName);
     }
 
