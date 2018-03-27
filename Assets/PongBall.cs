@@ -5,6 +5,7 @@ using UnityEngine;
 public class PongBall : MonoBehaviour {
 
     public float ballVelocity = 5.0f;
+    public float velocityIncreaseAmt = 0.5f;
     [Range(0.0f, 1.0f)]
     public float minStartVelX = 0.25f;
     public int pointsPerScore = 1;
@@ -14,20 +15,23 @@ public class PongBall : MonoBehaviour {
     public ScoreManager scoreManager;
 
     private Vector3 startPos;
+    private float trueVel;
 
 	
 	void Start () {
         Invoke("SetRandVel", startWait);
         startPos = transform.position;
+        trueVel = ballVelocity;
 	}
 
     private void OnCollisionEnter(Collision collision)
     {
+        trueVel += velocityIncreaseAmt;
         if(collision.gameObject.tag == "Paddle")
         {
             Vector3 dir = transform.position - collision.transform.position;
             dir.Normalize();
-            body.velocity = dir * ballVelocity;
+            body.velocity = dir * trueVel;
         }
         else if(collision.gameObject.tag == "ScoreWall1")
         {
@@ -41,16 +45,21 @@ public class PongBall : MonoBehaviour {
             transform.position = startPos;
             SetRandVel();
         }
+        else
+        {
+            body.velocity = body.velocity.normalized * trueVel;
+        }
     }
 
     private void SetRandVel()
     {
+        trueVel = ballVelocity;
         Vector2 newVel = Random.insideUnitCircle.normalized;
         while(newVel.x < minStartVelX && newVel.x > -minStartVelX)
         {
             newVel = Random.insideUnitCircle.normalized;
         }
-        body.velocity = newVel * ballVelocity;
+        body.velocity = newVel * trueVel;
     }
 
 
