@@ -8,6 +8,7 @@ public class PongBall : MonoBehaviour {
     [Range(0.0f, 1.0f)]
     public float minStartVelX = 0.25f;
     public int pointsPerScore = 1;
+    public float startWait = 2.0f;
 
     public Rigidbody body;
     public ScoreManager scoreManager;
@@ -16,7 +17,7 @@ public class PongBall : MonoBehaviour {
 
 	
 	void Start () {
-        SetRandVel();
+        Invoke("SetRandVel", startWait);
         startPos = transform.position;
 	}
 

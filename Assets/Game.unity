@@ -1011,6 +1011,7 @@ MonoBehaviour:
   ballVelocity: 5
   minStartVelX: 0.5
   pointsPerScore: 1
+  startWait: 1
   body: {fileID: 880830978}
   scoreManager: {fileID: 1882375369}
 --- !u!1 &1281264432
@@ -1316,7 +1317,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f3ffd8a09a340740ba4d4dc129e1a88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointsToWin: 1
+  pointsToWin: 5
   postWinWait: 3
   scoreText1: {fileID: 618634915}
   scoreText2: {fileID: 311535377}
