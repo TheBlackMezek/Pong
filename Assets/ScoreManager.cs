@@ -2,14 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class ScoreManager : MonoBehaviour {
 
     public int pointsToWin = 1;
+    public float postWinWait = 3.0f;
 
     public Text scoreText1;
     public Text scoreText2;
     public Text winText;
+    public string menuSceneName = "Menu";
 
     private int score1 = 0;
     private int score2 = 0;
@@ -31,6 +34,7 @@ public class ScoreManager : MonoBehaviour {
         {
             Time.timeScale = 0;
             winText.text = "PLAYER 1 WINS!";
+            StartCoroutine(LoadMenu());
         }
     }
 
@@ -43,7 +47,23 @@ public class ScoreManager : MonoBehaviour {
         {
             Time.timeScale = 0;
             winText.text = "PLAYER 2 WINS!";
+            StartCoroutine(LoadMenu());
         }
+    }
+
+    public IEnumerator LoadMenu()
+    {
+        while(true)
+        {
+            float waitTime = Time.realtimeSinceStartup + postWinWait;
+            while(Time.realtimeSinceStartup < waitTime)
+            {
+                yield return 0;
+            }
+            break;
+        }
+
+        SceneManager.LoadScene(menuSceneName);
     }
 
 
